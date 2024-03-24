@@ -107,21 +107,22 @@ class UdfpsAnimationAdapter private constructor(
         private val adapter: UdfpsAnimationAdapter
     ) : RecyclerView.ViewHolder(rootView) {
 
-        private val title: TextView by lazy { itemView.findViewById(R.id.option_label) }
-        private val image: ImageView by lazy { itemView.findViewById(R.id.option_thumbnail) }
+        private val title: TextView? by lazy { itemView.findViewById(R.id.option_label) }
+        private val image: ImageView? by lazy { itemView.findViewById(R.id.option_thumbnail) }
 
         fun bind() {
             val animIndex = adapterPosition
             // Set the title and thumbnail
-            image.setImageDrawable(getDrawable(animIndex, true))
-            title.text = adapter.animationTitles[animIndex]
+            image?.setImageDrawable(getDrawable(animIndex, true))
+            title?.text = adapter.animationTitles[animIndex]
             itemView.isActivated = adapter.selectedAnim == animIndex
             itemView.setOnClickListener {
                 val bgDrawable = getDrawable(animIndex, false)
                 // No need to animate on none.
-                if (bgDrawable != null) {
-                    image.background = bgDrawable
-                    val animation = image.background as AnimationDrawable
+                val imageView = image
+                if (imageView != null && bgDrawable != null) {
+                    imageView.background = bgDrawable
+                    val animation = imageView.background as AnimationDrawable
                     animation.isOneShot = true
                     animation.start()
                 }

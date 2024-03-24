@@ -44,7 +44,7 @@ class UdfpsAnimationFragment : AppbarFragment() {
         val animationPackage = getString(
                 com.android.internal.R.string.config_udfps_animation_customization_package)
         val udfpsAnimationAdapter = UdfpsAnimationAdapter.from(requireContext(), animationPackage)
-        recyclerView.adapter = udfpsAnimationAdapter
+        recyclerView?.adapter = udfpsAnimationAdapter
     }
 
     override fun getDefaultTitle(): CharSequence {
